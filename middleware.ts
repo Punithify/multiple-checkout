@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+// run only on homepage
 export const config = {
   matcher: "/",
 };
 
-export default async function middleware(req) {
+export async function middleware(req: NextRequest) {
   const { nextUrl: url, geo } = req;
   console.log(req);
-  const country = geo.country | "IN";
-  console.log("geocountry", geo.country);
+  const country = geo?.country || "US";
 
   url.searchParams.set("country", country);
 

@@ -19,7 +19,7 @@ export default function Home({ country }) {
     <div>
       <div className="mt-20">
         <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
-          Payment Checkout Flow
+          Payment Checkout Flow {country}
         </h1>
       </div>
       <div className="container p-12 mx-auto">
