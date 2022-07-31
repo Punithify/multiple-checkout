@@ -6,12 +6,10 @@ export default function Home({ countryCode }) {
   const [stripeCheck, setStripeCheck] = useState(false);
 
   useEffect(() => {
-    if (!countryCode) {
-      return;
-    } else if (countryCode === "IN") {
+    if (countryCode === "IN") {
       setChecked(true);
     }
-  }, []);
+  }, [countryCode]);
 
   const displayRazorpay = () => {
     console.log("razorpay");
