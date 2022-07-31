@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { getCountryCode } from "../http/axios";
 
 export default function Home({ country }) {
-  // const [check, setChecked] = useState(false);
-  // const [stripeCheck, setStripeCheck] = useState(false);
+  const [check, setChecked] = useState(false);
+  const [stripeCheck, setStripeCheck] = useState(false);
 
   country = decodeURIComponent(country);
   console.log(country);
@@ -15,11 +14,25 @@ export default function Home({ country }) {
   const displayStripe = () => {
     console.log("stripe");
   };
+  useEffect(() => {
+    if (country === "IN") {
+      setChecked(true);
+      return;
+    } else {
+      setStripeCheck(true);
+    }
+  }, [country]);
+
   return (
     <div>
       <div className="mt-20">
         <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
-          Payment Checkout Flow {country}
+          Payment Checkout Flow
+        </h1>
+      </div>
+      <div>
+        <h1 className="text-md text-bold font-bold flex items-center justify-center text-amber-500 ">
+          Your from {country}
         </h1>
       </div>
       <div className="container p-12 mx-auto">
@@ -35,6 +48,9 @@ export default function Home({ country }) {
                   <input
                     type="radio"
                     className="w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
+                    checked={check}
+                    disabled={check ? false : true}
+                    onChange={(e) => {}}
                   />
                   <span className="ml-2">Pay using Razorpay</span>
                 </label>
@@ -44,13 +60,19 @@ export default function Home({ country }) {
                   <input
                     type="radio"
                     className="w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
+                    checked={stripeCheck}
+                    disabled={stripeCheck ? false : true}
+                    onChange={(e) => {}}
                   />
                   <span className="ml-2">Pay using Stripe</span>
                 </label>
               </div>
               <div className="mt-4">
-                <button className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">
-                  Process
+                <button
+                  onClick={check ? displayRazorpay : displayStripe}
+                  className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900"
+                >
+                  Pay
                 </button>
               </div>
             </div>
