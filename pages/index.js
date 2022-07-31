@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { handleClick } from "../utils/stripeCheckout";
 
 export default function Home({ country }) {
   const [check, setChecked] = useState(false);
@@ -11,8 +12,9 @@ export default function Home({ country }) {
     console.log("razorpay");
   };
 
-  const displayStripe = () => {
+  const displayStripe = async () => {
     console.log("stripe");
+    await handleClick();
   };
   useEffect(() => {
     if (country === "IN") {

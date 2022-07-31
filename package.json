@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "stripe/react-stripe-js",
+    "@stripe/stripe-js": "^1.34.0",
     "next": "12.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "stripe": "^9.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
