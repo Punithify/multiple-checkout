@@ -17,10 +17,11 @@ export const handleClick = async (event) => {
   const result = await stripe.redirectToCheckout({
     sessionId: session.id,
   });
-
+  console.log(result);
   if (result.error) {
     // If `redirectToCheckout` fails due to a browser or network
     // error, display the localized error message to your customer
     // using `result.error.message`.
   }
+  return result;
 };

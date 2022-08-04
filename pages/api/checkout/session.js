@@ -4,6 +4,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET, {
 });
 
 export default async (req, res) => {
+  console.log("hello");
   if (req.method === "POST") {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

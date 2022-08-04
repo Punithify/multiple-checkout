@@ -1,21 +1,41 @@
 import { useEffect, useState } from "react";
 import { handleClick } from "../utils/stripeCheckout";
+import { useCallback } from "react";
+import useRazorpay from "react-razorpay";
+import { handleCheckout } from "../utils/razorpayCheckout";
 
 export default function Home({ country }) {
   const [check, setChecked] = useState(false);
   const [stripeCheck, setStripeCheck] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
+  const Razorpay = useRazorpay();
 
   country = decodeURIComponent(country);
   console.log(country);
 
-  const displayRazorpay = () => {
-    console.log("razorpay");
-  };
+  const displayRazorpay = useCallback(async () => {
+    const res = await fetch("/api/checkout/payment");
+    const data = await res.json();
+    console.log(data);
+    const rzpay = new Razorpay(handleCheckout(data));
+    rzpay.open();
+  }, [Razorpay]);
 
   const displayStripe = async () => {
-    console.log("stripe");
     await handleClick();
   };
+
+  const onClickHandler = () => {
+    setDisabled(true);
+
+    if (check) {
+      displayRazorpay();
+      return;
+    }
+    displayStripe();
+  };
+
   useEffect(() => {
     if (country === "IN") {
       setChecked(true);
@@ -71,10 +91,22 @@ export default function Home({ country }) {
               </div>
               <div className="mt-4">
                 <button
-                  onClick={check ? displayRazorpay : displayStripe}
-                  className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900"
+                  disabled={disabled}
+                  className={`
+                  w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900`}
+                  onClick={onClickHandler}
                 >
-                  Pay
+                  {disabled ? (
+                    <>
+                      <svg
+                        className=" h-0 w-full mr-3 ..."
+                        viewBox="0 0 24 24"
+                      ></svg>
+                      Processing(Please wait....)
+                    </>
+                  ) : (
+                    "Pay"
+                  )}
                 </button>
               </div>
             </div>
