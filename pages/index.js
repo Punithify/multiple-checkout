@@ -60,7 +60,7 @@ export default function Home({ country }) {
         </div>
       </div>
 
-      <div className="bg-slate-200 container p-12  mx-auto rounded border-b-1 border-gray-300 border-4 ">
+      <div className="bg-slate-200 container p-12  mx-auto rounded border-b-1 border-gray-300 ">
         <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
           <div className="flex flex-col md:w-full ">
             <h1 className=" font-bold md:text-xl text-heading ">Payment</h1>
