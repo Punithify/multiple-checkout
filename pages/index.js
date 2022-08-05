@@ -3,7 +3,7 @@ import { handleClick } from "../utils/stripeCheckout";
 import { useCallback } from "react";
 import useRazorpay from "react-razorpay";
 import { handleCheckout } from "../utils/razorpayCheckout";
-import SVG from "../components/SVG";
+// import SVG from "../components/SVG";
 
 export default function Home({ country }) {
   const [check, setChecked] = useState(false);
@@ -82,7 +82,7 @@ export default function Home({ country }) {
                 </label>
                 {check ? (
                   <div>
-                    <SVG />
+                    {/* <SVG /> */}
                     <p className="mt-2 ">
                       After clicking “Pay”, you will be redirected to Razorpay
                       (Cards, UPI, NetBanking, Wallets) to complete your
@@ -108,7 +108,7 @@ export default function Home({ country }) {
                 </label>
                 {stripeCheck ? (
                   <div>
-                    <SVG />
+                    {/* <SVG /> */}
                     <p className="mt-2 ">
                       After clicking “Pay”, you will be redirected to Stripe
                       (Cards and Wallets) to complete your purchase securely.
