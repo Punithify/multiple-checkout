@@ -49,41 +49,43 @@ export default function Home({ country }) {
 
   return (
     <div>
-      <div className="mt-20 ">
+      <div className="mt-10 mb-4">
         <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
           Payment Checkout Flow
         </h1>
+        <div>
+          <h1 className="text-xl text-bold font-bold flex items-center justify-center text-amber-500 ">
+            Your from {country}
+          </h1>
+        </div>
       </div>
-      <div>
-        <h1 className="text-md text-bold font-bold flex items-center justify-center text-amber-500 ">
-          Your from {country}
-        </h1>
-      </div>
-      <div className="container p-12  mx-auto rounded border-b-1 border-gray-300 border-4 ">
+
+      <div className="bg-slate-200 container p-12  mx-auto rounded border-b-1 border-gray-300 border-4 ">
         <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
-          <div className="flex flex-col md:w-full">
+          <div className="flex flex-col md:w-full ">
             <h1 className=" font-bold md:text-xl text-heading ">Payment</h1>
             <span className="mb-4">
               All transactions are secure and encrypted.
             </span>
-            <div className=" bg-gray-100 w-full lg:w-1/2">
-              <div className="mt-2 ml-2 ">
+
+            <div className=" w-full lg:w-1/2">
+              <div className="bg-gray-100 mt-4 ml-4 rounded border-b-1">
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
-                    className="w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
+                    className="mx-2 my-2 w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
                     checked={check}
                     disabled={check ? false : true}
                     onChange={(e) => {}}
                   />
-                  <span className="ml-2">
+                  <span className="ml-2 mx-2 my-2 ">
                     Netbanking/UPI (Processed via Razorpay)
                   </span>
                 </label>
                 {check ? (
-                  <div>
+                  <div className="mx-2 my-2">
                     <SVG />
-                    <p className="mt-2 ">
+                    <p>
                       After clicking “Pay”, you will be redirected to Razorpay
                       (Cards, UPI, NetBanking, Wallets) to complete your
                       purchase securely.
@@ -93,11 +95,11 @@ export default function Home({ country }) {
                   ""
                 )}
               </div>
-              <div className="mt-6 ml-2 ">
+              <div className="mt-4 ml-2 rounded border-b-0 bg-gray-100">
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
-                    className="w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
+                    className="mx-2 my-2  w-6 h-6 text-green-600 border-0 rounded-md focus:ring-0"
                     checked={stripeCheck}
                     disabled={stripeCheck ? false : true}
                     onChange={(e) => {}}
@@ -107,9 +109,9 @@ export default function Home({ country }) {
                   </span>
                 </label>
                 {stripeCheck ? (
-                  <div>
+                  <div className="mx-2 my-2">
                     <SVG />
-                    <p className="mt-2 ">
+                    <p>
                       After clicking “Pay”, you will be redirected to Stripe
                       (Cards and Wallets) to complete your purchase securely.
                     </p>
@@ -122,6 +124,7 @@ export default function Home({ country }) {
                 <button
                   disabled={disabled}
                   className={`
+                  rounded
                   w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900`}
                   onClick={onClickHandler}
                 >
@@ -130,7 +133,7 @@ export default function Home({ country }) {
                       <span className="ml-2">Hold On...</span>
                     </>
                   ) : (
-                    "Pay"
+                    <span className="text-bold">Pay</span>
                   )}
                 </button>
               </div>
