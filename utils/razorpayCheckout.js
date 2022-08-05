@@ -10,11 +10,7 @@ export const handleCheckout = (order) => {
     handler: (res) => {
       console.log(res);
     },
-    // modal: {
-    //   ondismiss: function () {
-    //     window.location.replace("http://localhost:3000");
-    //   },
-    // },
+
     prefill: {
       name: "Piyush Garg",
       email: "youremail@example.com",
