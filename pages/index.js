@@ -3,6 +3,7 @@ import { handleClick } from "../utils/stripeCheckout";
 import { useCallback } from "react";
 import useRazorpay from "react-razorpay";
 import { handleCheckout } from "../utils/razorpayCheckout";
+import SVG from "../components/SVG";
 
 export default function Home({ country }) {
   const [check, setChecked] = useState(false);
@@ -17,9 +18,10 @@ export default function Home({ country }) {
   const displayRazorpay = useCallback(async () => {
     const res = await fetch("/api/checkout/payment");
     const data = await res.json();
-    console.log(data);
+
     const rzpay = new Razorpay(handleCheckout(data));
     rzpay.open();
+    setDisabled(false);
   }, [Razorpay]);
 
   const displayStripe = async () => {
@@ -47,7 +49,7 @@ export default function Home({ country }) {
 
   return (
     <div>
-      <div className="mt-20">
+      <div className="mt-20 ">
         <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
           Payment Checkout Flow
         </h1>
@@ -57,15 +59,15 @@ export default function Home({ country }) {
           Your from {country}
         </h1>
       </div>
-      <div className="container p-12 mx-auto">
+      <div className="container p-12  mx-auto rounded border-b-1 border-gray-300 border-4 ">
         <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
           <div className="flex flex-col md:w-full">
-            <h2 className="mb-4 font-bold md:text-xl text-heading ">
-              Payment mode
-            </h2>
-
-            <div className="w-full lg:w-1/2">
-              <div className="mt-2">
+            <h1 className=" font-bold md:text-xl text-heading ">Payment</h1>
+            <span className="mb-4">
+              All transactions are secure and encrypted.
+            </span>
+            <div className=" bg-gray-100 w-full lg:w-1/2">
+              <div className="mt-2 ml-2 ">
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
@@ -74,10 +76,24 @@ export default function Home({ country }) {
                     disabled={check ? false : true}
                     onChange={(e) => {}}
                   />
-                  <span className="ml-2">Pay using Razorpay</span>
+                  <span className="ml-2">
+                    Netbanking/UPI (Processed via Razorpay)
+                  </span>
                 </label>
+                {check ? (
+                  <div>
+                    <SVG />
+                    <p className="mt-2 ">
+                      After clicking “Pay”, you will be redirected to Razorpay
+                      (Cards, UPI, NetBanking, Wallets) to complete your
+                      purchase securely.
+                    </p>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="mt-2">
+              <div className="mt-6 ml-2 ">
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
@@ -86,8 +102,21 @@ export default function Home({ country }) {
                     disabled={stripeCheck ? false : true}
                     onChange={(e) => {}}
                   />
-                  <span className="ml-2">Pay using Stripe</span>
+                  <span className="ml-2">
+                    Credit/Debit card (Processed via Stripe)
+                  </span>
                 </label>
+                {stripeCheck ? (
+                  <div>
+                    <SVG />
+                    <p className="mt-2 ">
+                      After clicking “Pay”, you will be redirected to Stripe
+                      (Cards and Wallets) to complete your purchase securely.
+                    </p>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="mt-4">
                 <button
@@ -98,11 +127,7 @@ export default function Home({ country }) {
                 >
                   {disabled ? (
                     <>
-                      <svg
-                        className=" h-0 w-full mr-3 ..."
-                        viewBox="0 0 24 24"
-                      ></svg>
-                      Processing(Please wait....)
+                      <span className="ml-2">Hold On...</span>
                     </>
                   ) : (
                     "Pay"
